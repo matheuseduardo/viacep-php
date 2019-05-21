@@ -39,7 +39,7 @@ class ZipCode
      *
      * @return \FlyingLuscas\ViaCEP\Address
      */
-    public function find($zipCode)
+    public function findByCep($zipCode)
     {
         $response = $this->http->request('GET', 'https://viacep.com.br/ws/'.$zipCode.'/json');
         $attributes = json_decode($response->getBody(), true);
