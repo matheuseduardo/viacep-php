@@ -78,10 +78,8 @@ class ZipCode
     {
         $this->addresses = []; // clear variables
         try {
-            $address = urlencode($address);  // encode
-            $city = urlencode($city);
 
-            $response = $this->http->request('GET', 'https://viacep.com.br/ws/'.$state.'/'.$city.'/'.$address.'/json');
+            $response = $this->http->request('GET', rawurldecode('https://viacep.com.br/ws/'.$state.'/'.$city.'/'.$address.'/json'));
             $results = json_decode($response->getBody(), true);
 
             if (array_key_exists('erro', $results) && $results['erro'] === true) {
@@ -91,7 +89,6 @@ class ZipCode
                     $address = new Address;
                     $address->fill($attributes);
                     $this->addresses[] = $address;
-                    print_r($this->addresses);
                 }
             }
 
