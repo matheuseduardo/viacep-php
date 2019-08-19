@@ -66,6 +66,19 @@ class ZipCode
     }
 
     /**
+     * Find the proper addres for the given zip code.
+     *
+     * @param  string $zipCode
+     *
+     * @return \FlyingLuscas\ViaCEP\Address
+     * @deprecated 1.0.1 Use findByCep instead.
+     */
+    public function find($zipCode)
+    {
+        return $this->findByCep($zipCode); // keeping compatibility
+    }
+
+    /**
      * Find the proper address for the given address (State, City, Street).
      *
      * @param  string $state   Estado do endereço completo a ser localizado.
