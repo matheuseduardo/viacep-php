@@ -28,4 +28,16 @@ class ZipCodeTest extends TestCase
         $this->assertInstanceOf(Address::class, $address);
         $this->assertEquals($zipcode, $address->zipCode);
     }
+
+    public function testFindAddressByStreetName()
+    {
+        $state = 'MG';
+        $city = 'Belo Horizonte';
+        $street = 'Rua João';
+        $addresses = (new ZipCode)->findByAddress($state, $city, $street);
+
+        array_map(function ($address) {
+            $this->assertInstanceOf(Address::class, $address);
+        }, $addresses);
+    }
 }
