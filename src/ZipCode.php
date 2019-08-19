@@ -78,8 +78,10 @@ class ZipCode
     {
         $this->addresses = []; // clear variables
         try {
-
-            $response = $this->http->request('GET', rawurldecode('https://viacep.com.br/ws/'.$state.'/'.$city.'/'.$address.'/json'));
+            $response = $this->http->request(
+                'GET',
+                rawurldecode('https://viacep.com.br/ws/'.$state.'/'.$city.'/'.$address.'/json')
+            );
             $results = json_decode($response->getBody(), true);
 
             if (array_key_exists('erro', $results) && $results['erro'] === true) {
@@ -91,7 +93,6 @@ class ZipCode
                     $this->addresses[] = $address;
                 }
             }
-
         } catch (\GuzzleHttp\Exception\GuzzleException $e) {
             return $this->addresses;
         }
